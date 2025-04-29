@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Симулятор Проникновения Излучения</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Симулятор Проникновения Излучения</h1>
+  <p class="subtitle">Визуализация взаимодействия излучения с различными материалами</p>
+
+  <div class="simulator">
+    <div class="controls">
+      <div class="control-group">
+        <label for="radiationType">Тип излучения:</label>
+        <select id="radiationType">
+          <option value="alpha">Альфа</option>
+          <option value="beta">Бета</option>
+          <option value="gamma">Гамма</option>
+          <option value="neutron">Нейтроны</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="radiationEnergy">Энергия (MeV):</label>
+        <input type="range" id="radiationEnergy" min="0.1" max="10" step="0.1" value="1">
+        <span id="energyValue">1 MeV</span>
+      </div>
+
+      <div class="control-group">
+        <label for="materialType">Материал:</label>
+        <select id="materialType">
+          <option value="air">Воздух</option>
+          <option value="water">Вода</option>
+          <option value="paper">Бумага</option>
+          <option value="concrete">Бетон</option>
+          <option value="aluminum">Алюминий</option>
+          <option value="iron">Железо</option>
+          <option value="copper">Медь</option>
+          <option value="lead">Свинец</option>
+          <option value="uranium">Уран</option>
+          <option value="wood">Дерево</option>
+          <option value="glass">Стекло</option>
+          <option value="plastic">Пластик</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="materialDensity">Плотность (г/см³):</label>
+        <input type="range" id="materialDensity" min="0.1" max="20" step="0.01" value="1.0">
+        <span id="densityValue">1.0 г/см³</span>
+      </div>
+
+      <div class="control-group">
+        <label for="thickness">Толщина (мм):</label>
+        <input type="range" id="thickness" min="1" max="500" value="50">
+        <span id="thicknessValue">50 мм</span>
+      </div>
+    </div>
+
+    <div class="visualization">
+      <div class="radiation-source"></div>
+      <div class="radiation-particles"></div>
+      <div class="material-barrier"></div>
+      <div class="detector"></div>
+    </div>
+
+    <div class="results">
+      <div class="result-item">
+        <span>Исходное излучение:</span>
+        <span id="initialCount">1000 частиц</span>
+      </div>
+      <div class="result-item">
+        <span>Прошедшее излучение:</span>
+        <span id="penetratedCount">0 частиц</span>
+      </div>
+      <div class="result-item">
+        <span>Процент прохождения:</span>
+        <span id="penetrationRate">0%</span>
+      </div>
+      <div class="result-item">
+        <span>Толщина полупоглощения:</span>
+        <span id="halfValueLayer">0 мм</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(120deg, #e0e7ff 0%, #f8fafc 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 900px;
+    margin: 48px auto;
+    background: rgba(255,255,255,0.98);
+    border-radius: 28px;
+    box-shadow: 0 12px 48px rgba(60, 72, 100, 0.22);
+    padding: 48px 36px;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    text-align: center;
+    color: #1e293b;
+    margin-bottom: 28px;
+    font-size: 2.5rem;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 1.18rem;
+    margin-bottom: 36px;
+}
+
+.simulator {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.control-group label {
+    min-width: 120px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+select, input[type="range"] {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    font-size: 1rem;
+}
+
+#thicknessValue, #energyValue, #densityValue {
+    min-width: 60px;
+    text-align: right;
+}
+
+.visualization {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+    background: #f1f5f9;
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+}
+
+.radiation-source, .detector {
+    width: 100px;
+    height: 100px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.radiation-source {
+    box-shadow: 0 0 15px #3b82f6;
+}
+
+.detector {
+    border: 2px solid #64748b;
+    transition: background-color 0.3s;
+}
+
+/* Эффект вспышки */
+.detector.flash {
+    background-color: #22c55e;
+}
+
+.radiation-particles, .detected-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.material-barrier {
+    width: 100px;
+    height: 100%;
+    background: #cbd5e1;
+    margin: 0 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s, width 0.3s;
+}
+
+.results {
+    display: flex;
+    justify-content: space-around;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.result-item span:first-child {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.result-item span:last-child {
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Анимация частиц */
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: moveParticle 2s linear forwards;
+}
+
+@keyframes moveParticle {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(300px, var(--randomY, 0px));
+        opacity: 0;
+    }
+}
+
+/* Цвета материалов */
+.material-barrier[data-material="air"] { background: #e0f2fe; }
+.material-barrier[data-material="water"] { background: #bae6fd; }
+.material-barrier[data-material="paper"] { background: #f3f4f6; }
+.material-barrier[data-material="concrete"] { background: #d1d5db; }
+.material-barrier[data-material="aluminum"] { background: #94a3b8; }
+.material-barrier[data-material="iron"] { background: #6b7280; }
+.material-barrier[data-material="copper"] { background: #b87333; }
+.material-barrier[data-material="lead"] { background: #475569; }
+.material-barrier[data-material="uranium"] { background: #1e40af; }
+
+/* Новые материалы */
+.material-barrier[data-material="wood"] { background: #deb887; }
+.material-barrier[data-material="glass"] { background: #b0c4de; }
+.material-barrier[data-material="plastic"] { background: #d1fae5; }
+
+/* Цвета частиц в зависимости от типа излучения */
+.radiation-particles[data-type="alpha"] .particle { background: #ef4444; }
+.radiation-particles[data-type="beta"] .particle { background: #3b82f6; }
+.radiation-particles[data-type="gamma"] .particle { background: #10b981; }
+.radiation-particles[data-type="neutron"] .particle { background: #8b5cf6; }
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        margin: 24px auto;
+        padding: 24px 16px;
+    }
+
+    .controls {
+        padding: 16px;
+    }
+
+    .control-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .visualization {
+        height: 150px;
+    }
+
+    .radiation-source, .detector {
+        width: 80px;
+        height: 80px;
+    }
+
+    .particle {
+        width: 6px;
+        height: 6px;
+    }
+}
